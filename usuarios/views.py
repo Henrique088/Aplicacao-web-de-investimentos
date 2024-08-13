@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from empresarios.models import Empresas
 
+
 # Create your views here.
 
 
@@ -54,3 +55,14 @@ def logar(request):
 
         messages.add_message(request, constants.ERROR, 'Usuario ou senha inválidos')
         return redirect('/usuarios/logar')
+
+
+def redirecionamento(request):
+
+    user_id = request.user.id
+
+    if request.method == 'GET':
+        return render(request, 'redirecionamento.html', {'user_id':user_id})
+    
+
+    

@@ -1,0 +1,26 @@
+{% extends "base.html" %} 
+{% load static %}
+
+{% block 'head' %} 
+    <link rel="stylesheet" href="{% static 'usuarios/css/redirecionamento.css' %}">
+{% endblock 'head' %} 
+
+{% block 'body' %}
+
+
+<div class="alinha"> 
+<a class="button" href="{% url 'cadastrar_empresa' %}">Cadastrar Empresa</a>
+<a class="button" href="{% url 'empresa' user_id %}">Empresa</a>
+<a class="button" href="{% url 'listar_empresas'  %}">Listar Empresa</a>
+<a class="button" href="{% url 'empresa' user_id %}">Empresa</a>
+
+
+</div>
+<div class="loader">
+    <span>PSW11</span>
+    <span>PSW11</span>
+</div>
+
+
+
+{% endblock 'body'%}
