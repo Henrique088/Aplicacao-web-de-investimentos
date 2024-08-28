@@ -9,6 +9,11 @@ from empresarios.models import Empresas
 
 # Create your views here.
 
+def index(request):
+    if not request.user.is_authenticated:
+        return redirect('/usuarios/login')
+    
+    return redirect('/usuarios/redirecionamento')
 
 def cadastro(request):
     if(request.method == "GET"):
