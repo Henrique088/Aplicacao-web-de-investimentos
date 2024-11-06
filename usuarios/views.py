@@ -11,7 +11,7 @@ from empresarios.models import Empresas
 
 def index(request):
     if not request.user.is_authenticated:
-        return redirect('/usuarios/login')
+        return redirect('/usuarios/logar')
     
     return redirect('/usuarios/redirecionamento')
 

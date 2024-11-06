@@ -21,8 +21,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-8wv(!6fu+(4-n^$%7(*i4uhv00%#1o)q_(q^_3^=#=k@w2^5st'
-
+# SECRET_KEY = 'django-insecure-8wv(!6fu+(4-n^$%7(*i4uhv00%#1o)q_(q^_3^=#=k@w2^5st'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'chave_secreta_default')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -78,9 +78,18 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mydb',
+        'USER': 'postgres',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
+        'PORT': '5432'
+
     }
 }
 
@@ -140,3 +149,13 @@ MESSAGE_TAGS = {
     constants.INFO: 'alert-info',
     constants.WARNING: 'alert-warning',
 }
+
+
+
+# Configuração do WhiteNoise
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Para servir os arquivos estáticos no Heroku
+import os
+if 'DYNO' in os.environ:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
